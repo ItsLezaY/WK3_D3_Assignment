@@ -57,23 +57,24 @@ class Move_Tutor(Pokemon):
             elif choice == '2':
                 self.show_learned_moves()
             elif choice == '3':
-                if len(self.taught_moves) == 4:
-                    print(f"{self.name.title()} already knows 4 moves. {self.name.title()} can't learn more.")
+                move_to_teach = input("Enter a move to teach: ")
+                if move_to_teach in self.move_list and move_to_teach not in self.taught_moves:
+                    self.taught_moves.append(move_to_teach)
+                    print(f"{self.name} learned {move_to_teach}!")
+                elif move_to_teach in self.taught_moves:
+                    print(f"{self.name} already knows {move_to_teach}.")
                 else:
-                    move_to_teach = input("Enter a move to teach: ")
-                    if move_to_teach in self.move_list and move_to_teach not in self.taught_moves:
-                        self.taught_moves.append(move_to_teach)
-                        print(f"{self.name} learned {move_to_teach}!")
-                    elif move_to_teach in self.taught_moves:
-                        print(f"{self.name} already knows {move_to_teach}.")
-                    else:
-                        print(f"{move_to_teach} is not an option for {self.name.title()}.")
+                    print(f"{move_to_teach} is not an option for {self.name.title()}.")
             elif choice == '4':
                 break
             else:
                 print("Invalid option. Please choose again.")
+                
+        if len(self.taught_moves) == 4:
+            print(f"{self.name.title()} can't learn more moves.")  # Message when max moves are reached
 
-pokemon_name = "Piplup"
+
+pokemon_name = "Piplup"             # pokemon name here
 tutor = Move_Tutor(pokemon_name)
 
 while True:
